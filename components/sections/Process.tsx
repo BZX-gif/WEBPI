@@ -8,7 +8,7 @@ export function Process() {
     <section className="border-t border-line py-24 lg:py-36">
       <Container>
         <SectionLabel index="05">Process</SectionLabel>
-        <h2 className="mt-5 max-w-3xl font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+        <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold tracking-tight sm:text-5xl">
           From first conversation to a product people can use.
         </h2>
 

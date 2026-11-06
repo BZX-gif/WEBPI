@@ -40,7 +40,7 @@ export default async function InsightPage({
         <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-signal">
           {insight.category} · {insight.dateLabel} · {insight.readTime}
         </p>
-        <h1 className="mt-6 max-w-3xl font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-6xl">
+        <h1 className="mt-6 max-w-3xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold leading-[1.1] tracking-tight sm:text-6xl">
           {insight.title}
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-soft">{insight.excerpt}</p>
@@ -94,7 +94,7 @@ export default async function InsightPage({
             </p>
             <Link
               href={`/insights/${next.slug}`}
-              className="mt-3 block font-display text-3xl font-extrabold hover:text-signal"
+              className="mt-3 block break-words font-display text-3xl font-extrabold hover:text-signal"
             >
               {next.title}
             </Link>

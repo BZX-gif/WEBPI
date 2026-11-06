@@ -12,7 +12,7 @@ export function Intro() {
           </div>
           <div className="lg:col-span-8">
             <Reveal>
-              <h2 className="max-w-4xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              <h2 className="max-w-4xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
                 Good businesses deserve exceptional digital experiences.
               </h2>
             </Reveal>

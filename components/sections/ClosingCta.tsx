@@ -20,7 +20,7 @@ export function ClosingCta({
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-signal">
             {eyebrow}
           </p>
-          <h2 className="mt-6 max-w-4xl font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          <h2 className="mt-6 max-w-4xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
             {title}
           </h2>
           <p className="mt-6 max-w-xl text-base leading-7 text-soft">{text}</p>

@@ -46,7 +46,7 @@ export default async function ProjectPage({
           <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-signal">
             {project.category} · {project.year}
           </p>
-          <h1 className="mt-5 font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+          <h1 className="mt-5 font-display text-[clamp(2rem,9vw,3rem)] font-extrabold tracking-tight sm:text-7xl">
             {project.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-soft">{project.overview}</p>
@@ -128,7 +128,7 @@ export default async function ProjectPage({
                     <dd className="mt-1">
                       <a
                         href={project.liveUrl}
-                        className="inline-flex items-center gap-1 hover:text-signal"
+                        className="inline-flex min-h-9 items-center gap-1 hover:text-signal"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -183,7 +183,7 @@ export default async function ProjectPage({
               This is currently the only published case study. Future work will
               appear here as it is completed.
             </p>
-            <Link href="/work" className="mt-6 inline-block text-sm uppercase tracking-[0.18em] hover:text-signal">
+            <Link href="/work" className="mt-6 inline-flex min-h-11 items-center text-sm uppercase tracking-[0.18em] hover:text-signal">
               All work
             </Link>
           </Container>

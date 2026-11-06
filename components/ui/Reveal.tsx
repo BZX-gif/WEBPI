@@ -21,6 +21,13 @@ export function Reveal({
     const el = ref.current;
     if (!el) return;
 
+    // Without IntersectionObserver (very old browsers) content must still
+    // be visible rather than stuck at opacity 0.
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

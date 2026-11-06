@@ -40,7 +40,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {footerNav.studio.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-sm text-soft hover:text-paper">
+                    <Link href={item.href} className="inline-flex min-h-9 items-center text-sm text-soft hover:text-paper">
                       {item.label}
                     </Link>
                   </li>
@@ -54,7 +54,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {footerNav.services.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="text-sm text-soft hover:text-paper">
+                    <Link href={item.href} className="inline-flex min-h-9 items-center text-sm text-soft hover:text-paper">
                       {item.label}
                     </Link>
                   </li>
@@ -67,32 +67,32 @@ export function Footer() {
               </p>
               <ul className="mt-4 space-y-2.5 text-sm text-soft">
                 <li>
-                  <Link href="/contact" className="hover:text-paper">
+                  <Link href="/contact" className="inline-flex min-h-9 items-center hover:text-paper">
                     Contact
                   </Link>
                 </li>
                 <li>
-                  <Link href="/start" className="hover:text-paper">
+                  <Link href="/start" className="inline-flex min-h-9 items-center hover:text-paper">
                     Project enquiry
                   </Link>
                 </li>
                 {configured(site.contact.email) ? (
                   <li>
-                    <a href={`mailto:${site.contact.email}`} className="hover:text-paper">
+                    <a href={`mailto:${site.contact.email}`} className="inline-flex min-h-9 items-center hover:text-paper">
                       {site.contact.email}
                     </a>
                   </li>
                 ) : null}
                 {configured(site.contact.phone) ? (
                   <li>
-                    <a href={`tel:${site.contact.phone}`} className="hover:text-paper">
+                    <a href={`tel:${site.contact.phone}`} className="inline-flex min-h-9 items-center hover:text-paper">
                       {site.contact.phone}
                     </a>
                   </li>
                 ) : null}
                 {whatsapp ? (
                   <li>
-                    <a href={whatsapp} className="hover:text-paper" target="_blank" rel="noopener noreferrer">
+                    <a href={whatsapp} className="inline-flex min-h-9 items-center hover:text-paper" target="_blank" rel="noopener noreferrer">
                       WhatsApp
                     </a>
                   </li>
@@ -105,7 +105,7 @@ export function Footer() {
                     <li key={item.label}>
                       <a
                         href={item.href}
-                        className="text-sm text-soft hover:text-paper"
+                        className="inline-flex min-h-9 items-center text-sm text-soft hover:text-paper"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -129,7 +129,7 @@ export function Footer() {
           <p>© {site.copyrightYear} WEBPI. All rights reserved.</p>
           <div className="flex flex-wrap gap-5">
             {footerNav.legal.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-paper">
+              <Link key={item.href} href={item.href} className="inline-flex min-h-9 items-center hover:text-paper">
                 {item.label}
               </Link>
             ))}
