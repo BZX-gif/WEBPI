@@ -27,6 +27,9 @@ html,
 body {
   min-height: 100%;
   overflow-x: hidden;
+  /* `clip` avoids creating a scroll container, which would break
+     position: sticky on desktop. Older browsers keep the hidden fallback. */
+  overflow-x: clip;
 }
 
 body {
@@ -60,6 +63,15 @@ select {
 .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.04em;
+}
+
+/* Syne is a wide display face. Long words must never push a phone layout
+   sideways; break them rather than clipping the page. */
+h1,
+h2,
+h3,
+h4 {
+  overflow-wrap: break-word;
 }
 
 .font-serif {

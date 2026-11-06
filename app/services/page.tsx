@@ -34,7 +34,7 @@ export default function ServicesPage() {
               <div className="grid gap-10 lg:grid-cols-12">
                 <div className="lg:col-span-4">
                   <p className="font-mono text-[0.68rem] text-signal">{service.number}</p>
-                  <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+                  <h2 className="mt-4 font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold tracking-tight sm:text-4xl">
                     {service.title}
                   </h2>
                 </div>

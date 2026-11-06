@@ -40,7 +40,7 @@ export function Hero() {
           <span>India</span>
         </div>
 
-        <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-6">
+        <div className="grid items-end gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-8">
             <h1 className="hero-type text-[clamp(2.75rem,9.4vw,8.5rem)]">
               <span className="block rise" style={{ animationDelay: "80ms" }}>
@@ -58,14 +58,14 @@ export function Hero() {
 
           <div
             ref={fieldRef}
-            className="instrument relative mx-auto aspect-square w-full max-w-[320px] lg:col-span-4 lg:max-w-none"
+            className="instrument relative mx-auto aspect-square w-full max-w-[260px] sm:max-w-[320px] lg:col-span-4 lg:max-w-none"
             aria-hidden="true"
           >
             <HeroInstrument />
           </div>
         </div>
 
-        <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12">
+        <div className="grid gap-6 border-t border-line pt-6 sm:gap-8 sm:pt-8 lg:grid-cols-12">
           <p className="max-w-xl text-base leading-7 text-soft sm:text-lg lg:col-span-6">
             Digital experiences designed with purpose, developed with precision
             and built for ambitious businesses.

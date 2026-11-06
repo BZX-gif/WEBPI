@@ -16,13 +16,13 @@ export function SelectedWork() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <SectionLabel index="04">Selected work</SectionLabel>
-            <h2 className="mt-5 max-w-xl font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <h2 className="mt-5 max-w-xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold tracking-tight sm:text-5xl">
               Work that can be visited.
             </h2>
           </div>
           <Link
             href="/work"
-            className="btn-ghost text-[0.72rem] uppercase tracking-[0.18em]"
+            className="btn-ghost !min-h-11 text-[0.72rem] uppercase tracking-[0.18em]"
           >
             All work
             <ArrowUpRight size={14} />

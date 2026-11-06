@@ -10,7 +10,7 @@ export function WhyWebpi() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
             <SectionLabel index="06">Why WEBPI</SectionLabel>
-            <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight sm:text-5xl">
+            <h2 className="mt-5 font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold tracking-tight sm:text-5xl">
               Principles we actually work by.
             </h2>
             <p className="mt-6 max-w-md text-base leading-7 text-soft">

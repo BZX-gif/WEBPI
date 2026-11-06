@@ -14,7 +14,7 @@ export default function NotFound() {
         <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-signal">
           404
         </p>
-        <h1 className="mt-6 max-w-3xl font-display text-5xl font-extrabold tracking-tight sm:text-7xl">
+        <h1 className="mt-6 max-w-3xl font-display text-[clamp(2rem,9vw,3rem)] font-extrabold tracking-tight sm:text-7xl">
           This page has gone missing.
         </h1>
         <p className="mt-6 max-w-lg text-base leading-7 text-soft">

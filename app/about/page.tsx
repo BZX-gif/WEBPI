@@ -25,7 +25,7 @@ export default function AboutPage() {
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <h2 className="font-display text-3xl font-extrabold lg:col-span-4">
+            <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold lg:col-span-4">
               Why we exist
             </h2>
             <div className="max-w-2xl space-y-5 text-base leading-8 text-soft lg:col-span-8">
@@ -54,7 +54,7 @@ export default function AboutPage() {
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <h2 className="font-display text-3xl font-extrabold lg:col-span-4">
+            <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold lg:col-span-4">
               Design philosophy
             </h2>
             <div className="max-w-2xl space-y-5 text-base leading-8 text-soft lg:col-span-8">
@@ -77,7 +77,7 @@ export default function AboutPage() {
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <h2 className="font-display text-3xl font-extrabold lg:col-span-4">
+            <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold lg:col-span-4">
               Technology
             </h2>
             <div className="max-w-2xl space-y-5 text-base leading-8 text-soft lg:col-span-8">
@@ -98,7 +98,7 @@ export default function AboutPage() {
 
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
-          <h2 className="font-display text-3xl font-extrabold">How we work</h2>
+          <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold">How we work</h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-soft">
             Direct communication. Written scope. Clear milestones. You will
             know what is being made, when you will see it, and what happens
@@ -110,7 +110,7 @@ export default function AboutPage() {
 
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
-          <h2 className="font-display text-3xl font-extrabold">Standards</h2>
+          <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold">Standards</h2>
           <ul className="mt-12 grid gap-0 md:grid-cols-2">
             {aboutStandards.map((item, index) => (
               <Reveal
@@ -132,7 +132,7 @@ export default function AboutPage() {
       <section className="border-b border-line py-20 lg:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <h2 className="font-display text-3xl font-extrabold lg:col-span-4">
+            <h2 className="font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold lg:col-span-4">
               Long-term vision
             </h2>
             <div className="max-w-2xl space-y-5 text-base leading-8 text-soft lg:col-span-8">
@@ -151,7 +151,7 @@ export default function AboutPage() {
           <p className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-mute">
             People
           </p>
-          <h2 className="mt-4 font-display text-3xl font-extrabold">
+          <h2 className="mt-4 font-display text-[clamp(1.6rem,7.6vw,1.875rem)] font-extrabold">
             Founder &amp; team
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-soft">
