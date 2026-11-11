@@ -1,15 +1,16 @@
 import Link from "next/link";
+import { ArrowUp } from "lucide-react";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { configured, footerNav, site, socialLinks, whatsappHref } from "@/lib/site";
 
 const linkClass =
-  "inline-flex min-h-8 items-center text-ink/80 transition-colors duration-300 hover:text-ink hover:underline underline-offset-2";
+  "inline-flex min-h-9 items-center text-paper/80 transition-colors duration-300 hover:text-accent";
 
 function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="font-semibold text-ink">{title}</p>
-      <ul className="mt-2">{children}</ul>
+      <p className="mono text-paper/45">{title}</p>
+      <ul className="mt-4">{children}</ul>
     </div>
   );
 }
@@ -19,21 +20,20 @@ export function Footer() {
   const whatsapp = whatsappHref();
 
   return (
-    <footer className="bg-mist text-xs text-sub">
-      <div className="mx-auto max-w-[1240px] px-5 pb-8 pt-14 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Link href="/" aria-label="WEBPI home" className="inline-flex text-ink">
-              <Wordmark />
-            </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed">
+    <footer className="relative overflow-hidden bg-ink text-paper">
+      <div className="mx-auto max-w-[1520px] px-5 pt-16 sm:px-10 sm:pt-24">
+        <div className="grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="display-md max-w-md">
+              Designed to stand apart. <span className="em">Built to perform.</span>
+            </p>
+            <p className="mt-6 max-w-sm text-paper/60">
               Independent digital studio. Websites, e-commerce and digital
               products for businesses that want a stronger presence.
             </p>
-            <p className="mt-3 text-sm font-medium text-ink">{site.tagline}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4 lg:col-span-7">
             <Column title="Studio">
               {footerNav.studio.map((item) => (
                 <li key={item.href}>
@@ -85,36 +85,50 @@ export function Footer() {
                 </li>
               ) : null}
             </Column>
-            {social.length > 0 ? (
-              <Column title="Follow">
-                {social.map((item) => (
-                  <li key={item.label}>
-                    <a href={item.href} className={linkClass} target="_blank" rel="noopener noreferrer">
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </Column>
-            ) : null}
+            <Column title={social.length > 0 ? "Follow" : "Legal"}>
+              {(social.length > 0 ? [] : footerNav.legal).map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={linkClass}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              {social.map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className={linkClass} target="_blank" rel="noopener noreferrer">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </Column>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-hair pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mono mt-16 flex flex-col gap-4 border-t border-paper/15 pt-6 text-paper/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            Copyright © {site.copyrightYear} WEBPI. All rights reserved.
+            © {site.copyrightYear} WEBPI — {site.location}
           </p>
-          <ul className="flex flex-wrap items-center gap-x-4">
-            {footerNav.legal.map((item, index) => (
-              <li key={item.href} className="flex items-center gap-4">
-                {index > 0 ? <span className="h-3 w-px bg-hair" aria-hidden="true" /> : null}
-                <Link href={item.href} className={linkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p>{site.location}</p>
+          {social.length > 0 ? (
+            <ul className="flex flex-wrap gap-x-6">
+              {footerNav.legal.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="inline-flex min-h-9 items-center hover:text-paper">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          <a href="#main" className="inline-flex min-h-9 items-center gap-2 hover:text-paper">
+            Back to top
+            <ArrowUp size={14} strokeWidth={1.8} aria-hidden="true" />
+          </a>
         </div>
+      </div>
+
+      {/* The name, set as large as the page allows and cropped by the edge. */}
+      <div className="pointer-events-none mt-6 select-none px-3 sm:px-6" aria-hidden="true">
+        <Wordmark className="-mb-[0.2em] block w-full text-center text-[27vw] leading-[0.8] !tracking-[-0.06em] text-paper min-[1520px]:text-[26rem]" />
       </div>
     </footer>
   );

@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check } from "lucide-react";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { Button } from "@/components/ui/Button";
-import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ScrollScene } from "@/components/ui/ScrollScene";
@@ -51,71 +49,75 @@ export default async function ProjectPage({
 
   return (
     <>
-      <section className="pt-32 sm:pt-40 lg:pt-48">
-        <Container size="text" className="text-center">
-          <p className="rise eyebrow">
-            {project.category} · {project.year}
-          </p>
-          <h1 className="display-xl mt-4">
+      <section className="pt-28 sm:pt-36">
+        <Container>
+          <div className="rise flex items-center justify-between gap-4 border-b border-line pb-4">
+            <Link href="/work" className="eyebrow transition-colors duration-300 hover:text-accent-ink">
+              Work / Case study
+            </Link>
+            <p className="mono text-sub">
+              {project.category} · {project.year}
+            </p>
+          </div>
+
+          <h1 className="display-xl mt-8 sm:mt-10">
             <span className="line-mask">
-              <span style={{ "--d": "80ms" } as React.CSSProperties}>{project.title}</span>
+              <span style={{ "--d": "100ms" } as React.CSSProperties}>{project.title}</span>
             </span>
           </h1>
-          <p
-            className="rise lead mx-auto mt-6 max-w-3xl"
-            style={{ "--d": "260ms" } as React.CSSProperties}
-          >
-            {project.overview}
-          </p>
-          <div
-            className="rise mt-8 flex flex-col items-center justify-center gap-x-7 gap-y-2 sm:flex-row"
-            style={{ "--d": "380ms" } as React.CSSProperties}
-          >
-            <Button href={project.liveUrl} external size="lg">
-              Visit live project
-            </Button>
-            <Button href="/start" variant="link">
-              Start a similar project
-            </Button>
+
+          <div className="mt-10 grid gap-10 sm:mt-14 lg:grid-cols-12">
+            <div
+              className="rise order-2 flex flex-wrap items-center gap-x-7 gap-y-3 self-end lg:order-none lg:col-span-5"
+              style={{ "--d": "480ms" } as React.CSSProperties}
+            >
+              <Button href={project.liveUrl} external>
+                Visit live project
+              </Button>
+              <Button href="/start" variant="link">
+                Start a similar project
+              </Button>
+            </div>
+            <p
+              className="rise lead lg:col-span-6 lg:col-start-7"
+              style={{ "--d": "380ms" } as React.CSSProperties}
+            >
+              {project.overview}
+            </p>
           </div>
         </Container>
       </section>
 
       <section className="pt-14 sm:pt-20">
         <Container>
-          <ScrollScene start={0.95} end={0.18}>
-            <div
-              className="rise"
-              style={{ "--d": "520ms" } as React.CSSProperties}
-            >
-              <BrowserFrame url={host} className="scene-scale">
-                <div className="relative aspect-[16/10] sm:aspect-[16/9]">
-                  <Image
-                    src={project.cover}
-                    alt={project.images[0]?.alt ?? project.title}
-                    fill
-                    priority
-                    sizes="(min-width: 1240px) 1176px, 100vw"
-                    className="object-cover"
-                  />
-                </div>
-              </BrowserFrame>
+          <ScrollScene start={1} end={-0.6}>
+            <div className="rise relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink sm:aspect-[16/8] sm:rounded-3xl">
+              <div className="scene-parallax absolute inset-0">
+                <Image
+                  src={project.cover}
+                  alt={project.images[0]?.alt ?? project.title}
+                  fill
+                  priority
+                  sizes="(min-width: 1520px) 1440px, 100vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </ScrollScene>
 
-          <dl className="mt-10 grid gap-x-8 gap-y-6 border-b border-hair pb-10 sm:grid-cols-4">
+          <dl className="grid border-b border-line sm:grid-cols-2 lg:grid-cols-4">
             {facts.map((fact) => (
-              <div key={fact.label}>
-                <dt className="text-sm text-faint">{fact.label}</dt>
-                <dd className="mt-1 font-medium">{fact.value}</dd>
+              <div key={fact.label} className="border-t border-line py-5 sm:border-t-0 sm:pr-6 sm:pt-6">
+                <dt className="mono text-sub">{fact.label}</dt>
+                <dd className="mt-2 text-lg leading-snug">{fact.value}</dd>
               </div>
             ))}
-            <div>
-              <dt className="text-sm text-faint">Live</dt>
-              <dd className="mt-1 font-medium">
+            <div className="border-t border-line py-5 sm:border-t-0 sm:pt-6">
+              <dt className="mono text-sub">Live</dt>
+              <dd className="mt-2 text-lg leading-snug">
                 <a
                   href={project.liveUrl}
-                  className="text-link hover:underline"
+                  className="break-all underline decoration-1 underline-offset-4 transition-colors duration-300 hover:text-accent-ink"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -127,116 +129,115 @@ export default async function ProjectPage({
         </Container>
       </section>
 
-      <section className="py-20 sm:py-28">
-        <Container size="text" className="grid gap-16 sm:gap-20">
-          <Block title="Business context" text={project.context} />
-          <Block title="Objective" text={project.objective} />
-          <Block title="Design direction" text={project.direction} />
+      <section className="py-20 sm:py-32">
+        <Container>
+          <Block index="01" title="Business context" text={project.context} />
+          <Block index="02" title="Objective" text={project.objective} />
+          <Block index="03" title="Design direction" text={project.direction} />
         </Container>
       </section>
 
-      <section className="bg-mist py-20 sm:py-28">
+      <section className="rounded-[2rem] bg-ink py-20 text-paper sm:rounded-[3rem] sm:py-32">
         <Container>
           <Reveal>
             <p className="eyebrow">Features</p>
-            <h2 className="display-lg mt-3">What was built.</h2>
+            <h2 className="display-lg mt-5">
+              What was <span className="em">built.</span>
+            </h2>
           </Reveal>
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          <ol className="mt-12 grid border-t border-paper/20 sm:mt-16 md:grid-cols-2 md:gap-x-10">
             {project.features.map((item, index) => (
               <Reveal
                 as="li"
                 key={item}
-                delay={(index % 3) * 80}
-                className="tile tile-white flex min-h-40 flex-col justify-between gap-8 p-7"
+                delay={(index % 2) * 80}
+                className="flex items-baseline gap-5 border-b border-paper/20 py-6"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <Check size={18} strokeWidth={2.2} aria-hidden="true" />
-                </span>
-                <p className="text-lg font-medium leading-snug tracking-[-0.015em]">{item}</p>
+                <span className="mono text-accent">{String(index + 1).padStart(2, "0")}</span>
+                <span className="display-sm">{item}</span>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </Container>
       </section>
 
-      <section className="py-20 sm:py-28">
+      <section className="py-20 sm:py-32">
         <Container>
           <div className="grid gap-5 md:grid-cols-2">
             {project.images.map((image, index) => (
               <Reveal
                 key={image.src}
-                delay={index * 100}
-                className="group relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-night-raised"
+                delay={index * 120}
+                className="reveal-clip relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink sm:rounded-3xl"
               >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="media-zoom object-cover"
+                  className="object-cover"
                 />
               </Reveal>
             ))}
           </div>
-        </Container>
 
-        <Container size="text" className="mt-20 grid gap-16 sm:mt-28 sm:gap-20">
-          <Block title="Responsive experience" text={project.responsive} />
-          <Reveal className="grid gap-4 md:grid-cols-12 md:gap-10">
-            <h2 className="display-sm md:col-span-4">Technical implementation</h2>
-            <div className="md:col-span-8">
-              <p className="text-sm text-faint">
-                Only the stack we can verify from the live project is listed.
-              </p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {project.technical.map((item) => (
-                  <li key={item} className="rounded-full bg-mist px-4 py-2 text-sm">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
+          <div className="mt-20 sm:mt-32">
+            <Block index="04" title="Responsive experience" text={project.responsive} />
+            <Reveal className="grid gap-4 border-t border-line py-10 sm:py-14 lg:grid-cols-12">
+              <p className="mono text-sub lg:col-span-1">05</p>
+              <h2 className="display-md lg:col-span-4">Technical implementation</h2>
+              <div className="lg:col-span-6 lg:col-start-7">
+                <ul className="flex flex-wrap gap-2">
+                  {project.technical.map((item) => (
+                    <li key={item} className="rounded-full border border-ink/25 px-4 py-2 text-sm">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-sm text-faint">
+                  Only the stack we can verify from the live project is listed.
+                </p>
+              </div>
+            </Reveal>
+          </div>
 
-      <section className="border-t border-hair py-16">
-        <Container size="text">
-          {next && next.slug !== project.slug ? (
-            <>
-              <p className="text-sm text-faint">Next project</p>
-              <Link
-                href={`/work/${next.slug}`}
-                className="display-lg mt-2 block transition-colors duration-300 hover:text-accent"
-              >
-                {next.title}
+          <div className="mt-10 border-t border-ink pt-10">
+            {next && next.slug !== project.slug ? (
+              <Link href={`/work/${next.slug}`} className="group block">
+                <p className="mono text-sub">Next project</p>
+                <p className="display-lg mt-3 transition-colors duration-300 group-hover:text-accent">
+                  {next.title}
+                </p>
               </Link>
-            </>
-          ) : (
-            <>
-              <p className="text-sm text-faint">Archive</p>
-              <p className="lead mt-2 max-w-xl">
-                This is currently the only published case study. Future work
-                will appear here as it is completed.
-              </p>
-              <Button href="/work" variant="link" className="mt-3">
-                All work
-              </Button>
-            </>
-          )}
+            ) : (
+              <div className="grid gap-4 lg:grid-cols-12">
+                <p className="mono text-sub lg:col-span-5">Archive</p>
+                <div className="lg:col-span-6 lg:col-start-7">
+                  <p className="lead">
+                    This is currently the only published case study. Future
+                    work will appear here as it is completed.
+                  </p>
+                  <Button href="/work" variant="link" className="mt-4">
+                    All work
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </Container>
       </section>
 
-      <ClosingCta title="Need a store or a site with this level of care?" />
+      <ClosingCta title="Need a store or a site with this level of *care?*" />
     </>
   );
 }
 
-function Block({ title, text }: { title: string; text: string }) {
+function Block({ index, title, text }: { index: string; title: string; text: string }) {
   return (
-    <Reveal className="grid gap-4 md:grid-cols-12 md:gap-10">
-      <h2 className="display-sm md:col-span-4">{title}</h2>
-      <p className="lead md:col-span-8">{text}</p>
+    <Reveal className="grid gap-4 border-t border-line py-10 sm:py-14 lg:grid-cols-12">
+      <p className="mono text-sub lg:col-span-1">{index}</p>
+      <h2 className="display-md lg:col-span-4">{title}</h2>
+      <p className="lead lg:col-span-6 lg:col-start-7">{text}</p>
     </Reveal>
   );
 }

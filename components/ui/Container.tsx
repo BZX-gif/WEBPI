@@ -1,9 +1,9 @@
 import { cn } from "@/lib/cn";
 
 const widths = {
-  wide: "max-w-[1240px]",
-  text: "max-w-[980px]",
-  narrow: "max-w-[720px]",
+  wide: "max-w-[1520px]",
+  text: "max-w-[1100px]",
+  narrow: "max-w-[760px]",
 } as const;
 
 export function Container({
@@ -18,7 +18,7 @@ export function Container({
   as?: "div" | "section" | "header" | "footer" | "nav";
 }) {
   return (
-    <Tag className={cn("mx-auto w-full px-5 sm:px-8", widths[size], className)}>
+    <Tag className={cn("mx-auto w-full px-5 sm:px-10", widths[size], className)}>
       {children}
     </Tag>
   );

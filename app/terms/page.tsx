@@ -14,12 +14,12 @@ export default function TermsPage() {
     <>
       <PageHero
         eyebrow="Legal"
-        title="Terms of Service"
+        title="Terms of *Service*"
         text={`Last updated ${site.copyrightYear}. These terms govern use of this website and the start of a conversation with WEBPI.`}
       />
-      <section className="pb-24 sm:pb-32">
-        <Container size="narrow">
-          <div className="prose border-t border-hair pt-12">
+      <section className="pb-24 pt-12 sm:pb-36 sm:pt-16">
+        <Container>
+          <div className="prose lg:ml-[50%]">
             <section>
               <h2>The website</h2>
               <p>

@@ -121,17 +121,22 @@ The app is ready for [Vercel](https://vercel.com) or any Node host that can run 
 - Founder profile when verified copy is ready
 - Analytics, if desired
 
-## Design system
+## Design system — "Paper & Ink"
 
-- Wordmark: WEBPI, with a constructed W mark
-- Canvas: white `#FFFFFF` and mist `#F5F5F7`; night `#000000` for feature sections
-- Ink: `#1D1D1F`, secondary `#6E6E73`
-- Accent: `#0071E3`
-- Type: the system UI face (San Francisco on Apple devices), Inter everywhere else
+- Wordmark: WEBPI with a vermilion point
+- Paper: `#F1EDE4` (deep `#E6E0D2`, card `#F8F5EE`)
+- Ink: `#141310`, secondary `#5B564C`
+- Accent: vermilion `#FF4B1F`
+- Type: Instrument Serif (display), Geist (text), Geist Mono (labels) — all
+  self-hosted in `app/fonts`, SIL Open Font License
 - Tokens and component classes live in `app/globals.css`
+- Emphasis: wrap a run of a title in `*asterisks*` to set it in the italic
+  accent (`components/ui/Emph.tsx`)
 - Motion: `Reveal` (enter on scroll), `ScrollScene` (eased scroll progress as the
-  CSS variable `--p`), `app/template.tsx` (page entrance). All of it switches off
-  under `prefers-reduced-motion`, and content stays visible without JavaScript.
+  CSS variable `--p`, used for parallax and the word-by-word statement),
+  `Marquee`, `Cursor` (pointer label over `data-cursor` elements) and
+  `app/template.tsx` (page entrance). All of it switches off under
+  `prefers-reduced-motion`, and content stays visible without JavaScript.
 
-`public/og.png` and `app/apple-icon.png` still carry the previous dark artwork and
+`public/og.png` and `app/apple-icon.png` still carry earlier dark artwork and
 should be re-exported to match.

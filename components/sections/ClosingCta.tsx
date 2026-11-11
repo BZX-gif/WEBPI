@@ -1,6 +1,10 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Emph } from "@/components/ui/Emph";
+import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
+
+const ticker = ["Start a project", "Let's build it", "Say hello"] as const;
 
 export function ClosingCta({
   eyebrow = "Next",
@@ -9,29 +13,38 @@ export function ClosingCta({
   button = "Start a project",
 }: {
   eyebrow?: string;
+  /** Wrap a run in *asterisks* to set it in italics. */
   title?: string;
   text?: string;
   button?: string;
 }) {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="pb-5 sm:pb-10">
       <Container>
         <Reveal>
-          <div className="on-dark relative isolate overflow-hidden rounded-[2rem] bg-night px-6 py-20 text-center text-white sm:px-12 sm:py-28 lg:py-36">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 -bottom-1/2 -z-10 mx-auto h-full w-[min(90%,60rem)] rounded-full bg-[radial-gradient(closest-side,rgba(41,151,255,0.38),rgba(123,92,255,0.18)_55%,transparent)] blur-2xl"
+          <div className="overflow-hidden rounded-[2rem] bg-accent text-ink sm:rounded-[3rem]">
+            <Marquee
+              items={ticker}
+              speed={26}
+              className="border-b border-ink/20 py-4"
+              itemClassName="mono [&>span]:!text-ink"
             />
-            <p className="eyebrow !text-[#2997ff]">{eyebrow}</p>
-            <h2 className="display-lg mx-auto mt-3 max-w-3xl">{title}</h2>
-            <p className="lead mx-auto mt-5 max-w-xl !text-night-sub">{text}</p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-x-7 gap-y-2 sm:flex-row">
-              <Button href="/start" size="lg">
-                {button}
-              </Button>
-              <Button href="/contact" variant="link">
-                Contact the studio
-              </Button>
+            <div className="grid gap-10 px-6 py-16 sm:px-12 sm:py-24 lg:grid-cols-12 lg:items-end lg:py-32">
+              <div className="lg:col-span-8">
+                <p className="mono">{eyebrow}</p>
+                <h2 className="display-lg mt-6 [&_.em]:text-paper">
+                  <Emph>{title}</Emph>
+                </h2>
+              </div>
+              <div className="lg:col-span-4">
+                <p className="max-w-sm text-lg leading-snug text-ink/80">{text}</p>
+                <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+                  <Button href="/start">{button}</Button>
+                  <Button href="/contact" variant="link" arrow={false}>
+                    Contact the studio
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>

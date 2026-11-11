@@ -4,25 +4,33 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
-import { ctaNav, primaryNav, utilityNav } from "@/lib/site";
+import { Button } from "@/components/ui/Button";
+import { configured, ctaNav, primaryNav, site, socialLinks, utilityNav } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
 const links = [...primaryNav.filter((item) => item.href !== "/"), ...utilityNav];
+const menuLinks = [{ href: "/", label: "Home" }, ...links];
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
+  // The bar steps aside while reading down and returns on the way back up.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (Math.abs(y - last) < 6) return;
+      setHidden(y > last && y > 160);
+      last = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock the page behind the mobile menu. Both html and body are locked
-  // because iOS Safari ignores overflow rules on body alone.
+  // Lock the page behind the menu. Both html and body are locked because
+  // iOS Safari ignores overflow rules on body alone.
   useEffect(() => {
     if (!open) return;
 
@@ -47,7 +55,7 @@ export function Header() {
   }, [open]);
 
   // Close the menu when the route changes or when the viewport grows to
-  // the desktop breakpoint (where the menu is no longer rendered).
+  // the desktop breakpoint (where the menu is no longer offered).
   const [lastPathname, setLastPathname] = useState(pathname);
   if (lastPathname !== pathname) {
     setLastPathname(pathname);
@@ -55,7 +63,7 @@ export function Header() {
   }
 
   useEffect(() => {
-    const query = window.matchMedia("(min-width: 768px)");
+    const query = window.matchMedia("(min-width: 1024px)");
     const onChange = () => {
       if (query.matches) setOpen(false);
     };
@@ -66,26 +74,30 @@ export function Header() {
   const isCurrent = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  const social = socialLinks();
+
   return (
     <>
       <header
-        className={cn(
-          "glass fixed inset-x-0 top-0 z-50 transition-[box-shadow,background-color] duration-500",
-          scrolled && !open && "hairline-b",
-          open && "!bg-white",
-        )}
+        className="nav-shell fixed inset-x-0 top-3 z-50 px-3 sm:top-5 sm:px-5"
+        data-hidden={hidden && !open}
       >
-        <div className="mx-auto flex h-12 max-w-[1240px] items-center justify-between gap-6 px-5 sm:px-8">
+        <div
+          className={cn(
+            "mx-auto flex h-14 max-w-[1100px] items-center justify-between gap-4 rounded-full pl-5 pr-2 transition-colors duration-500",
+            open ? "text-paper" : "nav-pill text-ink",
+          )}
+        >
           <Link
             href="/"
             aria-label="WEBPI home"
-            className="relative z-50 inline-flex items-center py-2"
+            className="inline-flex items-center py-2 text-xl"
             onClick={() => setOpen(false)}
           >
             <Wordmark />
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-9 md:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
             {links.map((item) => (
               <Link
                 key={item.href}
@@ -98,65 +110,80 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-1">
-            <Link href={ctaNav.href} className="btn btn-primary btn-sm">
+          <div className="flex items-center gap-1.5">
+            <Button
+              href={ctaNav.href}
+              size="sm"
+              className={cn("hidden min-[380px]:inline-flex", open && "!hidden")}
+            >
               {ctaNav.label}
-            </Link>
+            </Button>
             <button
               type="button"
-              className="burger relative z-50 -mr-3 h-11 w-11 md:hidden"
+              className={cn(
+                "mono flex h-10 items-center rounded-full px-4 transition-colors duration-500 lg:hidden",
+                open ? "bg-paper text-ink" : "bg-ink/[0.07] text-ink",
+              )}
               aria-expanded={open}
-              aria-controls="mobile-menu"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-controls="site-menu"
               onClick={() => setOpen((value) => !value)}
             >
-              <span />
-              <span />
+              {open ? "Close" : "Menu"}
             </button>
           </div>
         </div>
       </header>
 
       {/*
-        The menu lives outside <header> on purpose. The header uses
-        backdrop-filter, which makes it the containing block for fixed
-        descendants — nesting the menu inside it would collapse the
-        full-screen overlay to the header height.
+        The menu lives outside <header> on purpose: the header is transformed
+        when it hides, which would make it the containing block for a fixed
+        child and collapse the full-screen panel.
       */}
       <div
-        id="mobile-menu"
+        id="site-menu"
         className={cn(
-          "fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-white transition-[opacity,visibility] duration-500 md:hidden",
-          open ? "menu-open visible opacity-100" : "invisible pointer-events-none opacity-0",
+          "menu-panel fixed inset-0 z-40 overflow-y-auto overscroll-contain bg-ink text-paper lg:hidden",
+          open && "is-open",
         )}
         aria-hidden={!open}
         inert={!open}
       >
-        <div className="flex min-h-full flex-col px-8 pb-10 pt-24">
-          <nav aria-label="Mobile" className="flex flex-1 flex-col">
-            {[{ href: "/", label: "Home" }, ...links].map((item, index) => (
+        <div className="flex min-h-full flex-col px-5 pb-8 pt-28 sm:px-10">
+          <nav aria-label="Menu" className="flex flex-1 flex-col justify-center">
+            {menuLinks.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
                 style={{ "--i": index } as React.CSSProperties}
                 className={cn(
-                  "menu-item py-2 text-[1.75rem] font-semibold leading-tight tracking-[-0.03em]",
-                  isCurrent(item.href) ? "text-ink" : "text-ink/55",
+                  "menu-item flex items-baseline gap-4 overflow-hidden border-b border-paper/15 py-3 font-serif text-[clamp(2.5rem,12vw,4.5rem)] leading-none tracking-[-0.02em]",
+                  isCurrent(item.href) && "italic text-accent",
                 )}
               >
-                {item.label}
+                <span>{item.label}</span>
               </Link>
             ))}
           </nav>
-          <Link
-            href={ctaNav.href}
-            onClick={() => setOpen(false)}
-            style={{ "--i": links.length + 1 } as React.CSSProperties}
-            className="menu-item btn btn-primary btn-lg mt-10 w-full"
-          >
-            {ctaNav.label}
-          </Link>
+
+          <div className="menu-fade mt-10 flex flex-col gap-6">
+            <Button href={ctaNav.href} variant="accent" className="w-full">
+              {ctaNav.label}
+            </Button>
+            <div className="mono flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-paper/60">
+              <span>{site.location}</span>
+              {configured(site.contact.email) ? (
+                <a href={`mailto:${site.contact.email}`} className="normal-case tracking-normal">
+                  {site.contact.email}
+                </a>
+              ) : null}
+              {social.slice(0, 3).map((item) => (
+                <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
