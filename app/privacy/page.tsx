@@ -14,12 +14,12 @@ export default function PrivacyPage() {
     <>
       <PageHero
         eyebrow="Legal"
-        title="Privacy Policy"
+        title="Privacy *Policy*"
         text={`Last updated ${site.copyrightYear}. This policy describes how WEBPI handles information you share with us.`}
       />
-      <section className="pb-24 sm:pb-32">
-        <Container size="narrow">
-          <div className="prose border-t border-hair pt-12">
+      <section className="pb-24 pt-12 sm:pb-36 sm:pt-16">
+        <Container>
+          <div className="prose lg:ml-[50%]">
             <p>
               WEBPI is an independent digital studio. We do not invent a legal
               entity, GST number or registered office here. Those details will

@@ -81,17 +81,19 @@ export function EnquiryForm() {
 
   if (status === "success") {
     return (
-      <div className="tile tile-white page-in px-7 py-14 text-center sm:px-12 sm:py-20" role="status">
-        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white">
-          <Check size={28} strokeWidth={2.4} aria-hidden="true" />
+      <div className="page-in rounded-2xl bg-ink px-7 py-14 text-paper sm:rounded-3xl sm:px-12 sm:py-20" role="status">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent text-ink">
+          <Check size={26} strokeWidth={2} aria-hidden="true" />
         </span>
-        <h2 className="display-md mt-6">Thank you.</h2>
-        <p className="lead mx-auto mt-4 max-w-lg">
+        <h2 className="display-lg mt-8">
+          Thank <span className="em">you.</span>
+        </h2>
+        <p className="mt-5 max-w-lg text-lg leading-snug text-paper/70">
           Your enquiry is with us. We read every one personally and typically
           reply within two working days with a clear next step — or an honest
           note if we are not the right studio for the work.
         </p>
-        <Button href="/" className="mt-8" variant="link">
+        <Button href="/" className="mt-9" variant="light">
           Back to home
         </Button>
       </div>
@@ -102,9 +104,9 @@ export function EnquiryForm() {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="tile tile-white grid gap-6 !overflow-visible p-6 sm:p-10 lg:p-12"
+      className="grid gap-8 rounded-2xl bg-card p-6 ring-1 ring-ink/10 sm:rounded-3xl sm:p-10 lg:p-12"
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-8 md:grid-cols-2">
         <Field
           label="Full name"
           name="name"
@@ -145,7 +147,7 @@ export function EnquiryForm() {
         />
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-8 md:grid-cols-3">
         <SelectField
           label="Project type"
           name="projectType"
@@ -185,13 +187,13 @@ export function EnquiryForm() {
       />
 
       <div>
-        <label htmlFor="description" className="text-sm font-medium text-ink">
+        <label htmlFor="description" className="mono text-sub">
           Project description
         </label>
         <textarea
           id="description"
           name="description"
-          className="field mt-2"
+          className="field mt-1"
           value={values.description}
           onChange={(event) => update("description", event.target.value)}
           aria-invalid={Boolean(errors.description)}
@@ -224,12 +226,12 @@ export function EnquiryForm() {
         </p>
       ) : null}
 
-      <div className="flex flex-col gap-5 border-t border-hair pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-md text-xs leading-relaxed text-faint">
           By sending this form you agree we may use the details to reply about
           your project. We do not sell contact information.
         </p>
-        <Button type="submit" size="lg" disabled={status === "submitting"}>
+        <Button type="submit" disabled={status === "submitting"}>
           {status === "submitting" ? "Sending…" : "Send enquiry"}
         </Button>
       </div>
@@ -260,14 +262,14 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="text-sm font-medium text-ink">
+      <label htmlFor={name} className="mono text-sub">
         {label}
       </label>
       <input
         id={name}
         name={name}
         type={type}
-        className="field mt-2"
+        className="field mt-1"
         value={value}
         onChange={(event) => onChange(event.target.value)}
         autoComplete={autoComplete}
@@ -304,13 +306,13 @@ function SelectField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="text-sm font-medium text-ink">
+      <label htmlFor={name} className="mono text-sub">
         {label}
       </label>
       <select
         id={name}
         name={name}
-        className="field mt-2"
+        className="field mt-1"
         data-empty={value === ""}
         value={value}
         onChange={(event) => onChange(event.target.value)}

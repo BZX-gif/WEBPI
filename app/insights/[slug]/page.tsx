@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { getInsight, getNextInsight, insights } from "@/data/insights";
 import { pageMetadata } from "@/lib/metadata";
-import { ChevronRight } from "lucide-react";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 
 export function generateStaticParams() {
@@ -36,72 +35,82 @@ export default async function InsightPage({
   const next = getNextInsight(insight.slug);
 
   return (
-    <article className="pb-8 pt-32 sm:pt-40 lg:pt-48">
-      <Container size="narrow">
-        <p className="rise text-sm text-faint">
-          <span className="font-semibold text-accent">{insight.category}</span>
-          {" · "}
-          {insight.dateLabel} · {insight.readTime} read
-        </p>
-        <h1 className="display-lg mt-4">
+    <article className="pt-28 sm:pt-36">
+      <Container>
+        <div className="rise flex items-center justify-between gap-4 border-b border-line pb-4">
+          <Link href="/insights" className="eyebrow transition-colors duration-300 hover:text-accent-ink">
+            Insights / {insight.category}
+          </Link>
+          <p className="mono text-sub">
+            {insight.dateLabel} · {insight.readTime} read
+          </p>
+        </div>
+
+        <h1 className="display-lg mt-8 max-w-[16ch] sm:mt-12">
           <span className="line-mask">
-            <span style={{ "--d": "80ms" } as React.CSSProperties}>{insight.title}</span>
+            <span style={{ "--d": "100ms" } as React.CSSProperties}>{insight.title}</span>
           </span>
         </h1>
-        <p className="rise lead mt-6" style={{ "--d": "260ms" } as React.CSSProperties}>
-          {insight.excerpt}
-        </p>
 
-        <div
-          className="rise prose mt-12 border-t border-hair pt-12"
-          style={{ "--d": "380ms" } as React.CSSProperties}
-        >
-          {insight.content.map((block, index) => {
-            if (block.type === "h2") {
-              return <h2 key={index}>{block.text}</h2>;
-            }
-            if (block.type === "quote") {
-              return (
-                <blockquote
-                  key={index}
-                  className="display-sm !my-12 border-l-[3px] border-accent pl-6 text-ink"
-                >
-                  {block.text}
-                </blockquote>
-              );
-            }
-            if (block.type === "ul") {
-              return (
-                <ul key={index} className="space-y-2">
-                  {block.items.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              );
-            }
-            return <p key={index}>{block.text}</p>;
-          })}
+        <div className="mt-12 grid gap-10 border-t border-line pt-10 sm:mt-16 lg:grid-cols-12">
+          <p
+            className="rise display-sm lg:col-span-4"
+            style={{ "--d": "380ms" } as React.CSSProperties}
+          >
+            {insight.excerpt}
+          </p>
+
+          <div
+            className="rise prose lg:col-span-7 lg:col-start-6"
+            style={{ "--d": "480ms" } as React.CSSProperties}
+          >
+            {insight.content.map((block, index) => {
+              if (block.type === "h2") {
+                return <h2 key={index}>{block.text}</h2>;
+              }
+              if (block.type === "quote") {
+                return (
+                  <blockquote
+                    key={index}
+                    className="display-md !my-14 border-l-2 border-accent pl-6 italic text-ink"
+                  >
+                    {block.text}
+                  </blockquote>
+                );
+              }
+              if (block.type === "ul") {
+                return (
+                  <ul key={index}>
+                    {block.items.map((item) => (
+                      <li key={item} className="flex gap-3 border-b border-line py-3 first:border-t">
+                        <span className="mt-[0.7em] h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
+              return <p key={index}>{block.text}</p>;
+            })}
+          </div>
         </div>
 
         {next ? (
           <Link
             href={`/insights/${next.slug}`}
-            className="tile group mt-20 block p-8 sm:p-10"
+            className="group mt-24 block border-t border-ink pt-10 sm:mt-32"
           >
-            <p className="text-sm text-faint">Read next</p>
-            <p className="display-md mt-2 break-words">{next.title}</p>
-            <span className="mt-4 inline-flex items-center gap-1 text-link">
-              Continue reading
-              <ChevronRight size={17} strokeWidth={1.8} className="arrow-nudge" aria-hidden="true" />
-            </span>
+            <p className="mono text-sub">Read next</p>
+            <p className="display-lg mt-3 max-w-[18ch] break-words transition-colors duration-300 group-hover:text-accent">
+              {next.title}
+            </p>
           </Link>
         ) : null}
       </Container>
 
-      <ClosingCta />
+      <div className="mt-24 sm:mt-32">
+        <ClosingCta />
+      </div>
     </article>
   );
 }

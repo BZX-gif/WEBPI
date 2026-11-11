@@ -14,12 +14,12 @@ export default function CookiesPage() {
     <>
       <PageHero
         eyebrow="Legal"
-        title="Cookie Policy"
+        title="Cookie *Policy*"
         text={`Last updated ${site.copyrightYear}.`}
       />
-      <section className="pb-24 sm:pb-32">
-        <Container size="narrow">
-          <div className="prose border-t border-hair pt-12">
+      <section className="pb-24 pt-12 sm:pb-36 sm:pt-16">
+        <Container>
+          <div className="prose lg:ml-[50%]">
             <p>
               This website aims to work with as few cookies as possible. We do
               not run advertising cookies. We do not load a cookie banner for

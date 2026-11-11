@@ -2,7 +2,6 @@ import { ClosingCta } from "@/components/sections/ClosingCta";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { Tile } from "@/components/ui/Tile";
 import { aboutStandards } from "@/data/principles";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -49,24 +48,23 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About"
-        title="Small details. Big ambitions."
+        meta="Independent — India"
+        title="Small details. *Big ambitions.*"
         text="WEBPI is an independent digital studio. We help businesses establish a strong digital presence through thoughtful design and dependable technology."
       />
 
-      <section className="pb-24 sm:pb-32">
-        <Container size="text">
-          {chapters.map((chapter) => (
+      <section className="pb-24 sm:pb-36">
+        <Container>
+          {chapters.map((chapter, index) => (
             <Reveal
               key={chapter.title}
-              className="grid gap-5 border-t border-hair py-14 sm:py-20 md:grid-cols-12 md:gap-10"
+              className="grid gap-5 border-b border-line py-14 sm:py-20 lg:grid-cols-12"
             >
-              <h2 className="display-md md:col-span-5">{chapter.title}</h2>
-              <div className="space-y-5 md:col-span-7">
-                {chapter.paragraphs.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className={index === 0 ? "lead !text-ink" : "leading-relaxed text-sub"}
-                  >
+              <p className="mono text-sub lg:col-span-1">{String(index + 1).padStart(2, "0")}</p>
+              <h2 className="display-md lg:col-span-4">{chapter.title}</h2>
+              <div className="space-y-5 lg:col-span-6 lg:col-start-7">
+                {chapter.paragraphs.map((paragraph, i) => (
+                  <p key={i} className={i === 0 ? "lead !text-ink" : "text-sub"}>
                     {paragraph}
                   </p>
                 ))}
@@ -76,45 +74,50 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bg-mist py-24 sm:py-32">
+      <section className="rounded-[2rem] bg-ink py-24 text-paper sm:rounded-[3rem] sm:py-36">
         <Container>
-          <Reveal className="mx-auto max-w-3xl text-center">
+          <Reveal>
             <p className="eyebrow">Standards</p>
-            <h2 className="display-lg mt-3">Four things we hold ourselves to.</h2>
+            <h2 className="display-lg mt-5">
+              Four things we hold <span className="em">ourselves to.</span>
+            </h2>
           </Reveal>
-          <ul className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5">
+          <ul className="mt-14 grid border-l border-t border-paper/20 sm:mt-20 sm:grid-cols-2">
             {aboutStandards.map((item, index) => (
-              <Reveal as="li" key={item.title} delay={(index % 2) * 100}>
-                <Tile tone="white" className="flex h-full min-h-64 flex-col p-8 sm:p-10">
-                  <span className="text-sm tabular-nums text-faint">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="display-md mt-auto pt-10">{item.title}</h3>
-                  <p className="mt-3 max-w-md leading-relaxed text-sub">{item.text}</p>
-                </Tile>
+              <Reveal
+                as="li"
+                key={item.title}
+                delay={index * 80}
+                className="flex min-h-[20rem] flex-col justify-between gap-10 border-b border-r border-paper/20 p-7 transition-colors duration-500 hover:bg-ink-raised sm:p-9"
+              >
+                <span className="mono text-accent">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3 className="display-md">{item.title}</h3>
+                  <p className="mt-4 text-paper/65">{item.text}</p>
+                </div>
               </Reveal>
             ))}
           </ul>
         </Container>
       </section>
 
-      <section className="py-24 sm:py-32">
-        <Container size="text">
-          <Reveal className="text-center">
-            <p className="eyebrow">Long-term vision</p>
-            <p className="display-md mx-auto mt-4 max-w-3xl !leading-[1.14]">
+      <section className="py-24 sm:py-36">
+        <Container>
+          <Reveal className="grid gap-6 lg:grid-cols-12">
+            <p className="eyebrow self-start lg:col-span-3 lg:pt-3">Long-term vision</p>
+            <p className="display-lg lg:col-span-9 lg:!text-[clamp(3rem,5.4vw,5.25rem)]">
               To become the studio ambitious businesses think of when they want
               digital work that stands apart and performs.{" "}
-              <span className="text-faint">
+              <span className="em">
                 Not the largest. The one that is trusted with the first
                 impression.
               </span>
             </p>
           </Reveal>
 
-          <Reveal className="mt-20 grid gap-5 border-t border-hair pt-14 sm:mt-28 sm:pt-20 md:grid-cols-12 md:gap-10">
-            <h2 className="display-md md:col-span-5">Founder &amp; team</h2>
-            <p className="leading-relaxed text-sub md:col-span-7">
+          <Reveal className="mt-20 grid gap-5 rounded-2xl bg-paper-deep p-7 sm:mt-28 sm:rounded-3xl sm:p-12 lg:grid-cols-12">
+            <h2 className="display-md lg:col-span-5">Founder &amp; team</h2>
+            <p className="lead lg:col-span-6 lg:col-start-7">
               This space is reserved for a verified founder profile and, in
               time, the people who make the work. We will not invent
               biographies to fill the page.
@@ -123,7 +126,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <ClosingCta title="If this sounds like how you want to work, write to us." />
+      <ClosingCta title="If this sounds like how you want to work, *write to us.*" />
     </>
   );
 }

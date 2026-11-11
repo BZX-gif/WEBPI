@@ -1,86 +1,57 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { processSteps } from "@/data/process";
-import { SectionHeading } from "@/components/sections/SectionHeading";
+import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
+
+const tones = [
+  "bg-card text-ink",
+  "bg-paper-deep text-ink",
+  "bg-accent text-ink",
+  "bg-ink text-paper",
+  "bg-card text-ink",
+  "bg-paper-deep text-ink",
+];
 
 export function Process() {
-  const track = useRef<HTMLOListElement>(null);
-  const [edges, setEdges] = useState({ start: true, end: false });
-
-  useEffect(() => {
-    const el = track.current;
-    if (!el) return;
-
-    const update = () => {
-      const max = el.scrollWidth - el.clientWidth;
-      const start = el.scrollLeft <= 4;
-      const end = el.scrollLeft >= max - 4;
-      setEdges((prev) => (prev.start === start && prev.end === end ? prev : { start, end }));
-    };
-
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
-  function move(direction: 1 | -1) {
-    const el = track.current;
-    if (!el) return;
-    const card = el.querySelector("li");
-    const step = card ? card.getBoundingClientRect().width + 20 : el.clientWidth * 0.8;
-    el.scrollBy({ left: direction * step, behavior: "smooth" });
-  }
-
   return (
-    <section className="py-24 sm:py-32 lg:py-40">
+    <section className="bg-paper py-24 sm:py-36">
       <Container>
-        <SectionHeading
-          eyebrow="Process"
-          title="From first conversation to a product people can use."
-        />
-      </Container>
+        <div className="grid gap-12 lg:grid-cols-12">
+          <Reveal className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start">
+            <p className="eyebrow">Process</p>
+            <h2 className="display-lg mt-5 !text-[clamp(2.75rem,5.6vw,5.25rem)]">
+              From first conversation to a product people can <span className="em">use.</span>
+            </h2>
+            <p className="mono mt-8 text-sub">Six steps — one team</p>
+          </Reveal>
 
-      <ol ref={track} className="gallery mt-12 sm:mt-16" aria-label="Process steps">
-        {processSteps.map((step) => (
-          <li
-            key={step.number}
-            className="tile flex min-h-[24rem] w-[min(82vw,23rem)] flex-col p-8 sm:p-10"
-          >
-            <p className="text-gradient w-fit text-6xl font-semibold tracking-[-0.05em]">
-              {step.number}
-            </p>
-            <h3 className="display-sm mt-auto pt-10">{step.title}</h3>
-            <p className="mt-3 leading-relaxed text-sub">{step.text}</p>
-          </li>
-        ))}
-      </ol>
-
-      <Container className="flex justify-end gap-3">
-        <button
-          type="button"
-          className="gallery-btn"
-          onClick={() => move(-1)}
-          disabled={edges.start}
-          aria-label="Previous step"
-        >
-          <ChevronLeft size={22} strokeWidth={1.8} />
-        </button>
-        <button
-          type="button"
-          className="gallery-btn"
-          onClick={() => move(1)}
-          disabled={edges.end}
-          aria-label="Next step"
-        >
-          <ChevronRight size={22} strokeWidth={1.8} />
-        </button>
+          {/* Each card sticks a little lower than the last, so they stack like index cards. */}
+          <ol className="lg:col-span-7">
+            {processSteps.map((step, index) => (
+              <li
+                key={step.number}
+                className={cn(
+                  "sticky mb-5 flex min-h-[19rem] flex-col justify-between gap-12 rounded-2xl p-7 shadow-[0_-12px_40px_-24px_rgba(20,19,16,0.35)] ring-1 ring-ink/10 last:mb-0 sm:min-h-[21rem] sm:rounded-3xl sm:p-10",
+                  tones[index % tones.length],
+                )}
+                style={{ top: `calc(6rem + ${index * 0.9}rem)` }}
+              >
+                <div className="flex items-start justify-between gap-6">
+                  <p className="font-serif text-7xl leading-[0.8] tracking-[-0.03em] sm:text-8xl">
+                    {step.number}
+                  </p>
+                  <p className="mono opacity-60">
+                    Step {index + 1} / {processSteps.length}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="display-md">{step.title}</h3>
+                  <p className="mt-3 max-w-lg opacity-75">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Container>
     </section>
   );

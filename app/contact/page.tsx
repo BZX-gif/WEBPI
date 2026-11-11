@@ -23,37 +23,38 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Have something ambitious in mind?"
+        meta="Replies within two working days"
+        title="Have something ambitious *in mind?*"
         text="The most reliable way to reach us is the project form. We read every enquiry and typically reply within two working days."
       />
 
-      <section className="bg-mist py-16 sm:py-24">
+      <section className="pb-24 pt-12 sm:pb-36 sm:pt-16">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <aside className="lg:col-span-4">
-              <h2 className="display-sm">Studio</h2>
-              <p className="mt-3 leading-relaxed text-sub">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <aside className="lg:sticky lg:top-28 lg:col-span-4 lg:self-start">
+              <p className="mono text-sub">Studio</p>
+              <p className="display-sm mt-4">
                 Independent digital studio, {site.location}. We work remotely
                 with clients wherever they are.
               </p>
               {hasDirect ? (
-                <ul className="mt-8 space-y-1">
+                <ul className="mt-8 border-t border-line">
                   {configured(site.contact.email) ? (
-                    <li>
+                    <li className="border-b border-line">
                       <a className="link break-all" href={`mailto:${site.contact.email}`}>
                         <span className="link-label">{site.contact.email}</span>
                       </a>
                     </li>
                   ) : null}
                   {configured(site.contact.phone) ? (
-                    <li>
+                    <li className="border-b border-line">
                       <a className="link" href={`tel:${site.contact.phone}`}>
                         <span className="link-label">{site.contact.phone}</span>
                       </a>
                     </li>
                   ) : null}
                   {whatsapp ? (
-                    <li>
+                    <li className="border-b border-line">
                       <a className="link" href={whatsapp} target="_blank" rel="noopener noreferrer">
                         <span className="link-label">WhatsApp</span>
                       </a>
@@ -61,7 +62,7 @@ export default function ContactPage() {
                   ) : null}
                 </ul>
               ) : (
-                <p className="mt-8 text-sm leading-relaxed text-faint">
+                <p className="mt-8 border-t border-line pt-5 text-sm text-faint">
                   Direct email, phone and WhatsApp will appear here once they
                   are configured for the studio.
                 </p>
@@ -72,7 +73,7 @@ export default function ContactPage() {
                     <li key={item.label}>
                       <a
                         href={item.href}
-                        className="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-sm transition-colors duration-300 hover:bg-ink hover:text-white"
+                        className="inline-flex min-h-10 items-center rounded-full border border-ink/25 px-4 text-sm transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-paper"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -83,7 +84,7 @@ export default function ContactPage() {
                 </ul>
               ) : null}
             </aside>
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-7 lg:col-start-6">
               <EnquiryForm />
             </div>
           </div>
