@@ -121,11 +121,17 @@ The app is ready for [Vercel](https://vercel.com) or any Node host that can run 
 - Founder profile when verified copy is ready
 - Analytics, if desired
 
-## Brand
+## Design system
 
-- Wordmark: WEBPI
-- Mark: constructed W with a square point
-- Field: deep black `#050505`
-- Paper: `#F3F0E7`
-- Signal: `#C9B896`
-- Type: Syne, Instrument Serif, Inter, Geist Mono
+- Wordmark: WEBPI, with a constructed W mark
+- Canvas: white `#FFFFFF` and mist `#F5F5F7`; night `#000000` for feature sections
+- Ink: `#1D1D1F`, secondary `#6E6E73`
+- Accent: `#0071E3`
+- Type: the system UI face (San Francisco on Apple devices), Inter everywhere else
+- Tokens and component classes live in `app/globals.css`
+- Motion: `Reveal` (enter on scroll), `ScrollScene` (eased scroll progress as the
+  CSS variable `--p`), `app/template.tsx` (page entrance). All of it switches off
+  under `prefers-reduced-motion`, and content stays visible without JavaScript.
+
+`public/og.png` and `app/apple-icon.png` still carry the previous dark artwork and
+should be re-exported to match.

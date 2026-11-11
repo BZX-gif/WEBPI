@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -17,45 +19,46 @@ export default function WorkPage() {
   return (
     <>
       <PageHero
-        index="02"
         eyebrow="Work"
         title="Selected work."
         text="We show only projects that exist. The archive is small on purpose. It will grow as the work does."
       />
 
-      <section className="py-16 lg:py-24">
+      <section className="pb-8">
         <Container>
-          <ul className="grid gap-16">
+          <ul className="grid gap-6">
             {projects.map((project) => (
-              <li key={project.slug}>
-                <Link href={`/work/${project.slug}`} className="work-frame group block">
-                  <div className="relative aspect-[16/10] overflow-hidden bg-raised">
+              <Reveal as="li" key={project.slug}>
+                <Link
+                  href={`/work/${project.slug}`}
+                  className="tile tile-dark group block"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[16/9]">
                     <Image
                       src={project.cover}
                       alt={project.images[0]?.alt ?? project.title}
                       fill
-                      sizes="(min-width: 1024px) 1200px, 100vw"
-                      className="work-image object-cover"
+                      priority
+                      sizes="(min-width: 1240px) 1176px, 100vw"
+                      className="media-zoom object-cover"
                     />
-                  </div>
-                  <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                    <div>
-                      <p className="font-mono text-[0.65rem] uppercase tracking-[0.24em] text-signal">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-12">
+                      <p className="text-sm text-white/70">
                         {project.category} · {project.year}
                       </p>
-                      <h2 className="mt-2 font-display text-3xl font-extrabold sm:text-4xl">
-                        {project.title}
-                      </h2>
-                      <p className="mt-3 max-w-xl text-sm leading-7 text-soft">
+                      <h2 className="display-lg mt-2">{project.title}</h2>
+                      <p className="mt-4 max-w-2xl leading-relaxed text-white/75">
                         {project.summary}
                       </p>
+                      <span className="mt-5 inline-flex items-center gap-1 text-[#2997ff]">
+                        Read the case study
+                        <ChevronRight size={17} strokeWidth={1.8} className="arrow-nudge" aria-hidden="true" />
+                      </span>
                     </div>
-                    <span className="text-[0.72rem] uppercase tracking-[0.18em] text-soft group-hover:text-paper">
-                      Case study
-                    </span>
                   </div>
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </Container>

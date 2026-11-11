@@ -7,30 +7,6 @@ import { organizationJsonLd } from "@/lib/json-ld";
 import { configured } from "@/lib/site";
 import "./globals.css";
 
-const syne = localFont({
-  src: "./fonts/syne.woff2",
-  variable: "--font-syne",
-  display: "swap",
-  weight: "500 800",
-});
-
-const instrument = localFont({
-  src: [
-    {
-      path: "./fonts/instrument-serif.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/instrument-serif-italic.woff2",
-      weight: "400",
-      style: "italic",
-    },
-  ],
-  variable: "--font-instrument",
-  display: "swap",
-});
-
 const inter = localFont({
   src: "./fonts/inter.woff2",
   variable: "--font-inter",
@@ -38,18 +14,11 @@ const inter = localFont({
   weight: "100 900",
 });
 
-const geistMono = localFont({
-  src: "./fonts/geist-mono.woff2",
-  variable: "--font-geist-mono",
-  display: "swap",
-  weight: "100 900",
-});
-
 export const metadata: Metadata = defaultMetadata;
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
-  colorScheme: "dark",
+  themeColor: "#ffffff",
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
 };
@@ -61,12 +30,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${instrument.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-void font-sans text-paper">
+      <body className="flex min-h-full flex-col bg-canvas font-sans text-ink">
+        {/* Without JavaScript, scroll-driven content rests in its final state. */}
+        <noscript>
+          <style>{`:root{--p:1}.reveal{opacity:1;transform:none;filter:none}`}</style>
+        </noscript>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-paper focus:px-4 focus:py-2 focus:text-void"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-white"
         >
           Skip to content
         </a>

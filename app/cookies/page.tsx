@@ -17,25 +17,25 @@ export default function CookiesPage() {
         title="Cookie Policy"
         text={`Last updated ${site.copyrightYear}.`}
       />
-      <section className="py-16">
-        <Container>
-          <div className="max-w-2xl space-y-8 text-sm leading-7 text-soft">
+      <section className="pb-24 sm:pb-32">
+        <Container size="narrow">
+          <div className="prose border-t border-hair pt-12">
             <p>
               This website aims to work with as few cookies as possible. We do
               not run advertising cookies. We do not load a cookie banner for
               technologies we do not use.
             </p>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Essential</h2>
-              <p className="mt-3">
+              <h2>Essential</h2>
+              <p>
                 The site may use strictly necessary storage required to run the
                 application (for example, security or load-balancing cookies
                 set by the host). These are not used for marketing.
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Analytics</h2>
-              <p className="mt-3">
+              <h2>Analytics</h2>
+              <p>
                 If the studio later enables Plausible or Google Analytics via
                 environment variables, that tool’s cookies or measurement
                 scripts will load. Until those variables are set, no analytics
@@ -43,8 +43,8 @@ export default function CookiesPage() {
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Changes</h2>
-              <p className="mt-3">
+              <h2>Changes</h2>
+              <p>
                 If we add non-essential cookies, this page will be updated and,
                 where required, consent will be requested.
               </p>

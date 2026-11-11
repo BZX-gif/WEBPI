@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
 
+/**
+ * Fades content up and into focus the first time it enters the viewport.
+ */
 export function Reveal({
   children,
   className,
@@ -12,30 +15,30 @@ export function Reveal({
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "section" | "li" | "article";
+  as?: "div" | "section" | "li" | "article" | "p" | "h2";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Without IntersectionObserver (very old browsers) content must still
-    // be visible rather than stuck at opacity 0.
+    // Without IntersectionObserver content must still be visible rather
+    // than stuck at opacity 0.
     if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
+      el.classList.add("is-visible");
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          // Toggled on the node directly: no React re-render per reveal.
+          el.classList.add("is-visible");
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.1, rootMargin: "0px 0px -6% 0px" },
     );
 
     observer.observe(el);
@@ -45,8 +48,8 @@ export function Reveal({
   return (
     <Tag
       ref={ref as never}
-      className={cn("reveal", visible && "is-visible", className)}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={cn("reveal", className)}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>

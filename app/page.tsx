@@ -4,7 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Intro } from "@/components/sections/Intro";
 import { Process } from "@/components/sections/Process";
 import { SelectedWork } from "@/components/sections/SelectedWork";
-import { WhyWebpi } from "@/components/sections/WhyWebpi";
+import { Principles } from "@/components/sections/Principles";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -22,7 +22,7 @@ export default function HomePage() {
       <Capabilities />
       <SelectedWork />
       <Process />
-      <WhyWebpi />
+      <Principles />
       <ClosingCta />
     </>
   );

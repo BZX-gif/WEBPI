@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { budgetOptions, projectTypes, timelineOptions } from "@/lib/site";
 import type { EnquiryFieldErrors, EnquiryInput } from "@/lib/enquiry";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 const empty: EnquiryInput = {
@@ -80,17 +81,17 @@ export function EnquiryForm() {
 
   if (status === "success") {
     return (
-      <div className="border border-line bg-raised px-6 py-12 sm:px-10" role="status">
-        <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-signal">
-          Received
-        </p>
-        <h2 className="mt-4 font-display text-3xl font-extrabold">Thank you.</h2>
-        <p className="mt-4 max-w-lg text-base leading-7 text-soft">
+      <div className="tile tile-white page-in px-7 py-14 text-center sm:px-12 sm:py-20" role="status">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white">
+          <Check size={28} strokeWidth={2.4} aria-hidden="true" />
+        </span>
+        <h2 className="display-md mt-6">Thank you.</h2>
+        <p className="lead mx-auto mt-4 max-w-lg">
           Your enquiry is with us. We read every one personally and typically
           reply within two working days with a clear next step — or an honest
           note if we are not the right studio for the work.
         </p>
-        <Button href="/" className="mt-8" variant="secondary">
+        <Button href="/" className="mt-8" variant="link">
           Back to home
         </Button>
       </div>
@@ -98,8 +99,12 @@ export function EnquiryForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-8">
-      <div className="grid gap-8 md:grid-cols-2">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="tile tile-white grid gap-6 !overflow-visible p-6 sm:p-10 lg:p-12"
+    >
+      <div className="grid gap-6 md:grid-cols-2">
         <Field
           label="Full name"
           name="name"
@@ -140,7 +145,7 @@ export function EnquiryForm() {
         />
       </div>
 
-      <div className="grid gap-8 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-3">
         <SelectField
           label="Project type"
           name="projectType"
@@ -180,7 +185,7 @@ export function EnquiryForm() {
       />
 
       <div>
-        <label htmlFor="description" className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-mute">
+        <label htmlFor="description" className="text-sm font-medium text-ink">
           Project description
         </label>
         <textarea
@@ -195,7 +200,7 @@ export function EnquiryForm() {
           placeholder="What are you building, who is it for, and what would success look like?"
         />
         {errors.description ? (
-          <p id="description-error" className="mt-2 text-sm text-[#d07a7a]">
+          <p id="description-error" className="mt-2 text-sm text-danger">
             {errors.description}
           </p>
         ) : null}
@@ -214,17 +219,17 @@ export function EnquiryForm() {
       </div>
 
       {status === "error" && message ? (
-        <p className="text-sm text-[#d07a7a]" role="alert">
+        <p className="text-sm text-danger" role="alert">
           {message}
         </p>
       ) : null}
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-md text-xs leading-5 text-mute">
+      <div className="flex flex-col gap-5 border-t border-hair pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-md text-xs leading-relaxed text-faint">
           By sending this form you agree we may use the details to reply about
           your project. We do not sell contact information.
         </p>
-        <Button type="submit" disabled={status === "submitting"}>
+        <Button type="submit" size="lg" disabled={status === "submitting"}>
           {status === "submitting" ? "Sending…" : "Send enquiry"}
         </Button>
       </div>
@@ -255,7 +260,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-mute">
+      <label htmlFor={name} className="text-sm font-medium text-ink">
         {label}
       </label>
       <input
@@ -272,7 +277,7 @@ function Field({
         placeholder={placeholder}
       />
       {error ? (
-        <p id={`${name}-error`} className="mt-2 text-sm text-[#d07a7a]">
+        <p id={`${name}-error`} className="mt-2 text-sm text-danger">
           {error}
         </p>
       ) : null}
@@ -299,13 +304,14 @@ function SelectField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-mute">
+      <label htmlFor={name} className="text-sm font-medium text-ink">
         {label}
       </label>
       <select
         id={name}
         name={name}
         className="field mt-2"
+        data-empty={value === ""}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={Boolean(error)}
@@ -314,13 +320,13 @@ function SelectField({
       >
         <option value="">Select</option>
         {options.map((option) => (
-          <option key={option.value} value={option.value} className="bg-void text-paper">
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
       {error ? (
-        <p id={`${name}-error`} className="mt-2 text-sm text-[#d07a7a]">
+        <p id={`${name}-error`} className="mt-2 text-sm text-danger">
           {error}
         </p>
       ) : null}

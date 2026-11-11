@@ -17,12 +17,12 @@ export default function TermsPage() {
         title="Terms of Service"
         text={`Last updated ${site.copyrightYear}. These terms govern use of this website and the start of a conversation with WEBPI.`}
       />
-      <section className="py-16">
-        <Container>
-          <div className="max-w-2xl space-y-8 text-sm leading-7 text-soft">
+      <section className="pb-24 sm:pb-32">
+        <Container size="narrow">
+          <div className="prose border-t border-hair pt-12">
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">The website</h2>
-              <p className="mt-3">
+              <h2>The website</h2>
+              <p>
                 This website is provided by WEBPI to present our work and to
                 receive project enquiries. Content is offered as-is. We take
                 care with accuracy but do not warrant that every page is
@@ -30,8 +30,8 @@ export default function TermsPage() {
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Enquiries are not contracts</h2>
-              <p className="mt-3">
+              <h2>Enquiries are not contracts</h2>
+              <p>
                 Sending a form is a request for a conversation. It does not
                 create an engagement, a reservation of dates, or an obligation
                 on either side. A project begins only when scope, quotation
@@ -39,8 +39,8 @@ export default function TermsPage() {
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Quotations and payment</h2>
-              <p className="mt-3">
+              <h2>Quotations and payment</h2>
+              <p>
                 Fees, timelines and payment stages are set per project. Work
                 does not start until the agreed first payment is received,
                 unless we have written otherwise. Support after launch exists
@@ -48,8 +48,8 @@ export default function TermsPage() {
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Intellectual property</h2>
-              <p className="mt-3">
+              <h2>Intellectual property</h2>
+              <p>
                 The WEBPI name, wordmark and the design of this website belong
                 to WEBPI. Client project materials remain subject to the
                 contract for that project. Do not reuse our identity as your
@@ -57,16 +57,16 @@ export default function TermsPage() {
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Acceptable use</h2>
-              <p className="mt-3">
+              <h2>Acceptable use</h2>
+              <p>
                 Do not misuse the enquiry form, attempt to disrupt the site, or
                 submit unlawful content. We may ignore or block abusive
                 submissions.
               </p>
             </section>
             <section>
-              <h2 className="font-display text-xl font-bold text-paper">Governing notes</h2>
-              <p className="mt-3">
+              <h2>Governing notes</h2>
+              <p>
                 WEBPI operates from India. Formal governing-law and entity
                 details will be added when the studio’s legal registration is
                 confirmed. Until then, these terms still describe how we work.

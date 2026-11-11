@@ -11,11 +11,9 @@ export function Wordmark({
   withMark?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("inline-flex items-center gap-2", className)}>
       {withMark ? <Mark className={markClassName} /> : null}
-      <span className="font-display text-[0.95rem] font-extrabold tracking-[0.22em]">
-        WEBPI
-      </span>
+      <span className="text-[1.0625rem] font-semibold tracking-[-0.02em]">WEBPI</span>
     </span>
   );
 }
