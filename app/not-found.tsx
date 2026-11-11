@@ -9,22 +9,30 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[80vh] items-center pt-24">
-      <Container>
-        <p className="font-mono text-[0.68rem] uppercase tracking-[0.28em] text-signal">
+    <section className="flex min-h-[86vh] items-center pt-12 text-center">
+      <Container size="text">
+        <p className="rise text-gradient mx-auto w-fit text-[clamp(5rem,20vw,11rem)] font-semibold leading-none tracking-[-0.06em]">
           404
         </p>
-        <h1 className="mt-6 max-w-3xl font-display text-[clamp(2rem,9vw,3rem)] font-extrabold tracking-tight sm:text-7xl">
+        <h1 className="rise display-md mt-4" style={{ "--d": "120ms" } as React.CSSProperties}>
           This page has gone missing.
         </h1>
-        <p className="mt-6 max-w-lg text-base leading-7 text-soft">
+        <p
+          className="rise lead mx-auto mt-4 max-w-lg"
+          style={{ "--d": "220ms" } as React.CSSProperties}
+        >
           The address does not match anything we built. It may have moved, or
           it may never have existed.
         </p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <Button href="/">Return home</Button>
-          <Button href="/start" variant="secondary">
-            Start a Project
+        <div
+          className="rise mt-8 flex flex-col items-center justify-center gap-x-7 gap-y-2 sm:flex-row"
+          style={{ "--d": "320ms" } as React.CSSProperties}
+        >
+          <Button href="/" size="lg">
+            Return home
+          </Button>
+          <Button href="/start" variant="link">
+            Start a project
           </Button>
         </div>
       </Container>

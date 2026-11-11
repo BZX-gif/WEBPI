@@ -46,7 +46,7 @@ export const utilityNav: NavItem[] = [
 
 export const ctaNav: NavItem = {
   href: "/start",
-  label: "Start a Project",
+  label: "Start a project",
 };
 
 export const footerNav = {

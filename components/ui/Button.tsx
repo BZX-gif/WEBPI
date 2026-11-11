@@ -1,22 +1,31 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "dark" | "light" | "link";
+type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "btn-primary",
-  secondary: "btn-secondary",
-  ghost: "btn-ghost",
+  primary: "btn btn-primary",
+  secondary: "btn btn-secondary",
+  dark: "btn btn-dark",
+  light: "btn btn-light",
+  link: "link",
+};
+
+const sizes: Record<Size, string> = {
+  sm: "btn-sm",
+  md: "",
+  lg: "btn-lg",
 };
 
 export function Button({
   href,
   children,
   variant = "primary",
+  size = "md",
   className,
   external,
-  arrow,
   type,
   disabled,
   ...props
@@ -24,30 +33,30 @@ export function Button({
   href?: string;
   children: React.ReactNode;
   variant?: Variant;
+  size?: Size;
   className?: string;
   external?: boolean;
-  arrow?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement> &
   React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const classes = cn(variants[variant], className);
+  const isLink = variant === "link";
+  const classes = cn(variants[variant], !isLink && sizes[size], className);
   const content = (
     <>
-      <span>{children}</span>
-      {arrow ? <ArrowUpRight size={15} strokeWidth={1.6} /> : null}
+      <span className="link-label">{children}</span>
+      {external ? (
+        <ArrowUpRight size={isLink ? 17 : 16} strokeWidth={1.8} aria-hidden="true" />
+      ) : isLink ? (
+        <ChevronRight size={17} strokeWidth={1.8} aria-hidden="true" />
+      ) : null}
     </>
   );
 
   if (href) {
     if (external) {
       return (
-        <a
-          href={href}
-          className={classes}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
           {content}
         </a>
       );

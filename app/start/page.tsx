@@ -14,16 +14,15 @@ export default function StartPage() {
   return (
     <>
       <PageHero
-        index="06"
         eyebrow="Start a project"
         title="Let's turn your idea into something real."
         text="A clear brief helps us reply with a useful first response. There is no charge for an initial conversation. If we are not the right studio, we will say so."
       />
-      <section className="py-16 lg:py-24">
+      <section className="bg-mist py-16 sm:py-24">
         <Container>
-          <div className="grid gap-16 lg:grid-cols-12">
-            <aside className="lg:col-span-4">
-              <ol className="space-y-8">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+            <aside className="lg:sticky lg:top-24 lg:col-span-4 lg:self-start">
+              <ol className="space-y-7">
                 {[
                   {
                     n: "01",
@@ -41,14 +40,18 @@ export default function StartPage() {
                     d: "Scope, sequence, quotation and payment milestones are written down before production starts.",
                   },
                 ].map((item) => (
-                  <li key={item.n}>
-                    <p className="font-mono text-[0.68rem] text-signal">{item.n}</p>
-                    <h2 className="mt-2 font-display text-xl font-bold">{item.t}</h2>
-                    <p className="mt-2 text-sm leading-7 text-soft">{item.d}</p>
+                  <li key={item.n} className="flex gap-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-medium tabular-nums shadow-card">
+                      {Number(item.n)}
+                    </span>
+                    <div>
+                      <h2 className="text-xl font-semibold tracking-[-0.02em]">{item.t}</h2>
+                      <p className="mt-1 leading-relaxed text-sub">{item.d}</p>
+                    </div>
                   </li>
                 ))}
               </ol>
-              <p className="mt-10 text-xs leading-5 text-mute">
+              <p className="mt-10 text-xs leading-relaxed text-faint">
                 Budget ranges are a starting point, expressed in INR, and can
                 be edited as the studio’s offering evolves. They help us reply
                 with the right level of detail.

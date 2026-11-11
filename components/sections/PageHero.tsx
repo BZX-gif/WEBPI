@@ -1,28 +1,40 @@
+import { cn } from "@/lib/cn";
 import { Container } from "@/components/ui/Container";
-import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function PageHero({
-  index,
   eyebrow,
   title,
   text,
+  className,
+  children,
 }: {
-  index?: string;
   eyebrow: string;
   title: string;
   text?: string;
+  className?: string;
+  children?: React.ReactNode;
 }) {
   return (
-    <section className="border-b border-line pt-32 pb-16 lg:pt-40 lg:pb-24">
-      <Container>
-        <SectionLabel index={index}>{eyebrow}</SectionLabel>
-        <h1 className="mt-6 max-w-4xl font-display text-[clamp(1.7rem,8vw,2.25rem)] font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-          {title}
+    <section className={cn("pb-16 pt-32 sm:pb-20 sm:pt-40 lg:pt-48", className)}>
+      <Container size="text" className="text-center">
+        <p className="rise eyebrow">{eyebrow}</p>
+        <h1 className="display-xl mx-auto mt-4 max-w-4xl !text-[clamp(2.5rem,7vw,5rem)]">
+          <span className="line-mask">
+            <span style={{ "--d": "80ms" } as React.CSSProperties}>{title}</span>
+          </span>
         </h1>
         {text ? (
-          <p className="mt-6 max-w-2xl text-base leading-7 text-soft sm:text-lg">
+          <p
+            className="rise lead mx-auto mt-6 max-w-2xl"
+            style={{ "--d": "260ms" } as React.CSSProperties}
+          >
             {text}
           </p>
+        ) : null}
+        {children ? (
+          <div className="rise mt-8" style={{ "--d": "380ms" } as React.CSSProperties}>
+            {children}
+          </div>
         ) : null}
       </Container>
     </section>

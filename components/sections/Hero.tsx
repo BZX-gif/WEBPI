@@ -1,111 +1,93 @@
-"use client";
-
-import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { projects } from "@/data/projects";
+import { BrowserFrame } from "@/components/ui/BrowserFrame";
 import { Button } from "@/components/ui/Button";
-import { Point } from "@/components/brand/Mark";
 import { Container } from "@/components/ui/Container";
+import { ScrollScene } from "@/components/ui/ScrollScene";
 
 export function Hero() {
-  const fieldRef = useRef<HTMLDivElement>(null);
-
-  function onMove(event: React.MouseEvent<HTMLDivElement>) {
-    const el = fieldRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    el.style.setProperty("--hx", x.toFixed(3));
-    el.style.setProperty("--hy", y.toFixed(3));
-  }
-
-  function onLeave() {
-    const el = fieldRef.current;
-    if (!el) return;
-    el.style.setProperty("--hx", "0");
-    el.style.setProperty("--hy", "0");
-  }
+  const project = projects[0];
+  const host = project.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
   return (
-    <section
-      className="relative min-h-[100svh] overflow-hidden page-grid pt-24"
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-    >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,184,150,0.07),transparent_55%)]" />
+    <section className="relative isolate overflow-hidden pt-28 sm:pt-36 lg:pt-40">
+      <div className="hero-aurora" aria-hidden="true" />
 
-      <Container className="relative flex min-h-[calc(100svh-6rem)] flex-col justify-between pb-8 pt-6">
-        <div className="flex items-center justify-between font-mono text-[0.65rem] uppercase tracking-[0.26em] text-mute">
-          <span>01 / Opening</span>
-          <span className="hidden sm:block">Independent digital studio</span>
-          <span>India</span>
-        </div>
+      <Container className="text-center">
+        <p className="rise eyebrow">Independent digital studio</p>
 
-        <div className="grid items-end gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-8">
-            <h1 className="hero-type text-[clamp(2.75rem,9.4vw,8.5rem)]">
-              <span className="block rise" style={{ animationDelay: "80ms" }}>
-                We build
-              </span>
-              <span className="block rise" style={{ animationDelay: "140ms" }}>
-                What&apos;s
-              </span>
-              <span className="mt-1 flex items-baseline gap-3 rise" style={{ animationDelay: "200ms" }}>
-                <span>Next</span>
-                <Point className="mb-1.5 bg-signal sm:mb-3" />
-              </span>
-            </h1>
-          </div>
+        <h1 className="display-xl mx-auto mt-4 max-w-5xl">
+          <span className="line-mask">
+            <span style={{ "--d": "80ms" } as React.CSSProperties}>We build</span>
+          </span>
+          <span className="line-mask">
+            <span style={{ "--d": "180ms" } as React.CSSProperties}>
+              what&apos;s <span className="text-gradient">next.</span>
+            </span>
+          </span>
+        </h1>
 
-          <div
-            ref={fieldRef}
-            className="instrument relative mx-auto aspect-square w-full max-w-[260px] sm:max-w-[320px] lg:col-span-4 lg:max-w-none"
-            aria-hidden="true"
-          >
-            <HeroInstrument />
-          </div>
-        </div>
+        <p
+          className="rise lead mx-auto mt-6 max-w-2xl"
+          style={{ "--d": "380ms" } as React.CSSProperties}
+        >
+          Digital experiences designed with purpose, developed with precision
+          and built for ambitious businesses.
+        </p>
 
-        <div className="grid gap-6 border-t border-line pt-6 sm:gap-8 sm:pt-8 lg:grid-cols-12">
-          <p className="max-w-xl text-base leading-7 text-soft sm:text-lg lg:col-span-6">
-            Digital experiences designed with purpose, developed with precision
-            and built for ambitious businesses.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row lg:col-span-6 lg:items-end lg:justify-end">
-            <Button href="/start">Start a Project</Button>
-            <Button href="/work" variant="secondary">
-              Explore Our Work
-            </Button>
-          </div>
+        <div
+          className="rise mt-8 flex flex-col items-center justify-center gap-x-7 gap-y-2 sm:flex-row"
+          style={{ "--d": "480ms" } as React.CSSProperties}
+        >
+          <Button href="/start" size="lg">
+            Start a project
+          </Button>
+          <Button href="/work" variant="link">
+            Explore our work
+          </Button>
         </div>
       </Container>
-    </section>
-  );
-}
 
-function HeroInstrument() {
-  return (
-    <svg viewBox="0 0 400 400" className="h-full w-full text-paper/80">
-      <g className="instrument-shift" fill="none" stroke="currentColor">
-        <circle cx="200" cy="200" r="168" strokeWidth="0.6" className="text-line-strong" />
-        <circle cx="200" cy="200" r="118" strokeWidth="0.7" className="spin-slow origin-center" style={{ transformOrigin: "200px 200px" }} />
-        <circle cx="200" cy="200" r="64" strokeWidth="1" className="text-signal" />
-        <path d="M200 18 V382" strokeWidth="0.5" className="text-line-strong" />
-        <path d="M18 200 H382" strokeWidth="0.5" className="text-line-strong" />
-        <path d="M68 68 L332 332" strokeWidth="0.4" className="text-mute/40" />
-        <path d="M110 268 V132 L200 248 L290 132 V268" strokeWidth="1.6" />
-        <rect x="286" y="258" width="10" height="10" fill="currentColor" stroke="none" className="text-signal" />
-        <circle cx="200" cy="200" r="3" fill="currentColor" stroke="none" />
-      </g>
-      <text
-        x="200"
-        y="392"
-        textAnchor="middle"
-        fill="currentColor"
-        className="text-mute"
-        style={{ fontSize: "9px", letterSpacing: "0.35em" }}
+      <div
+        className="rise mx-auto mt-14 w-full max-w-[1240px] px-5 sm:mt-20 sm:px-8"
+        style={{ "--d": "620ms" } as React.CSSProperties}
       >
-        PRECISION / CRAFT
-      </text>
-    </svg>
+        <ScrollScene start={0.95} end={0.18}>
+          <Link
+            href={`/work/${project.slug}`}
+            className="group scene-scale block"
+            aria-label={`${project.title} — view the case study`}
+          >
+            <BrowserFrame url={host}>
+              <div className="relative aspect-[16/10] overflow-hidden sm:aspect-[16/9]">
+                <Image
+                  src={project.cover}
+                  alt={project.images[0]?.alt ?? project.title}
+                  fill
+                  priority
+                  sizes="(min-width: 1240px) 1176px, 100vw"
+                  className="media-zoom object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-left text-white sm:p-10">
+                  <div>
+                    <p className="text-xs text-white/70 sm:text-sm">
+                      {project.category} · {project.year}
+                    </p>
+                    <p className="mt-1 text-xl font-semibold tracking-[-0.025em] sm:text-4xl">
+                      {project.title}
+                    </p>
+                  </div>
+                  <span className="hidden rounded-full bg-white/15 px-4 py-2 text-sm backdrop-blur-md transition-colors duration-500 group-hover:bg-white group-hover:text-ink sm:inline-block">
+                    View case study
+                  </span>
+                </div>
+              </div>
+            </BrowserFrame>
+          </Link>
+        </ScrollScene>
+      </div>
+    </section>
   );
 }
